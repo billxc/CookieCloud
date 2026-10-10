@@ -1,0 +1,11 @@
+**
+!Dockerfile
+!api/
+!api/app.js
+!api/package.json
+!api/package-lock.json
+!api/utils/
+!api/utils/logger.js
+!tests/
+!tests/smoke.cjs
+!LICENSE
