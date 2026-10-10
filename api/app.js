@@ -134,26 +134,16 @@ app.use(function (err, req, res, next) {
 });
 
 // graceful shutdown
-process.on('SIGTERM', async () => {
+process.once('SIGTERM', () => {
     logger.info('SIGTERM signal received.');
-
-    // close http server
     server.close(() => {
         logger.info('HTTP server closed.');
+        logger.end();
     });
-
-    // close cache
-    await cache.close();
-
-    // wait for log write
-    setTimeout(() => {
-        logger.info('Process terminated');
-        process.exit(0);
-    }, 1000);
 });
 
 const port = process.env.PORT || 8088;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     logger.info(`Server start on http://localhost:${port}${api_root}`);
 });
 
